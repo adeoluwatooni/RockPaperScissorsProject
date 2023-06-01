@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOM</title>
+  <link rel="stylesheet" href="./styles/dom.css">
+</head>
+<body>
+
+  <!-- <button onclick="
+  const buttonElement = document.querySelector('.js-subscribe-button')
+
+  if (buttonElement.innerText === 'Subscribe') {
+    buttonElement.innerHTML = 'Subscribed'
+  } else {
+    buttonElement.innerHTML = 'Subscribe'
+  }
+  " class="js-subscribe-button">Subscribe</button> -->
+
+  <button class="js-subscribe-button subscribeButton" onclick="subscribeButton()" >Subscribe</button>
+
+  <p> Amazon Shipping Calculator</p>
+  
+  <p> Orders under $50 = + $10 shipping</p>
+
+  <p> Orders above $49.99 = FREE shipping</p>
+
+  <input class="js-cost-input cost-input" placeholder="Cost Of Order" onkeydown="inputKeydownCalculator()"> 
+
+  <button onclick="calculateTotal()" class="calculateButton" >Calculate</button>
+
+  <p class="js-total-cost total-cost"> </p>
+
+  <hr>
+  <!-- ------------------------------------------------------------ -->
+
+  <button onclick="showChoice('heads')" >heads</button>
+  <button onclick="showChoice('tails')" >tails</button>
+
+  <p id="headOrTail"> Your choice will appear here</p>
+
+  <hr>
+  <!-- ------------------------------------------------------------ -->
+  <input placeholder="Name" class="name" onkeyup="showName2()">
+
+  <button onclick="showName()">submit</button>
+
+  <p id="nameOutput"> Your name is :</p>
+
+  <hr>
+  <!-- ------------------------------------------------------------ -->
+
+  <input placeholder="Price" class="priceInput">
+  <button onclick="calculator()">Calculate</button>
+
+  <p class="calculationResult"  > Your total will show here</p>
+
+  <hr>
+  <!-- ------------------------------------------------------------ -->
+
+  <input id="lastInput" onkeydown="repeating()" >
+
+  <p id="lastOutput">Your input will be displayed here as you type</p>
+
+
+  <script>
+
+    function repeating () {
+      let lastInput = document.querySelector('#lastInput')
+      let lastOutput = document.querySelector('#lastOutput')
+      lastOutput.innerText = lastInput.value
+    }
+
+
+
+    // -----------------------------------------------------------------
+
+    function calculator (){
+
+      let priceInput = Number(document.querySelector('.priceInput').value)
+      let priceOutput = priceInput + 10 
+      let calculationResult = document.querySelector('.calculationResult')
+      calculationResult.innerHTML = `$${priceOutput}`
+    }
+
+
+    // -----------------------------------------------------------------
+
+    function showName2 () {
+      if(event.key === 'Enter'){
+        showName()
+      }
+    }
+
+    function showName () {
+      let name = document.querySelector('.name').value
+      console.log(name)
+      document.querySelector('#nameOutput').innerText = `Your name is : ${name}`
+    }
+
+    // -----------------------------------------------------------------
+    const newResultElement = document.querySelector('#headOrTail')
+
+    function showChoice(input) {
+      if (input === 'heads') {
+        newResultElement.innerHTML = `You chose :${input}`
+      } else if (input === 'tails') {
+        newResultElement.innerHTML = `You chose  :${input}`
+      }
+    }
+
+    // -----------------------------------------------------------------
+
+    function inputKeydownCalculator () {
+      if (event.key === 'Enter') {
+        calculateTotal()
+      }
+    }
+
+    function calculateTotal  () {
+      const inputElement =  document.querySelector('.js-cost-input')
+      console.log(inputElement.value)
+      let cost = Number(inputElement.value) 
+      
+      if (cost < 50) {
+        cost = cost + 10
+      }
+
+      let totalCostElement = document.querySelector('.js-total-cost')
+      totalCostElement.innerText = `$ ${cost}`
+    }
+
+
+    function subscribeButton () {
+      let buttonElement = document.querySelector('.js-subscribe-button')
+      
+      if (buttonElement.innerText === 'Subscribe') {
+        buttonElement.innerHTML = 'Subscribed'
+        buttonElement.classList.add('is-subscribed')
+      } else {
+        buttonElement.innerHTML = 'Subscribe'
+        buttonElement.classList.remove('is-subscribed')
+      }
+    }
+  </script>
+</body>
+</html>
